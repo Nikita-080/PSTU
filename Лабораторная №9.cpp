@@ -11,7 +11,7 @@ bool Split(string s,int row_num)
     case 1:
         if (s==" ")
         {
-            cout << row_num << " Îøèáêà: ñëîâà íå íàéäåíû\n";
+            cout << row_num << " ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã±Ã«Ã®Ã¢Ã  Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã»\n";
             return false;
         }
         else words=1;
@@ -19,7 +19,7 @@ bool Split(string s,int row_num)
     case 2:
         if (s=="  ")
         {
-            cout << row_num << " Îøèáêà: ñëîâà íå íàéäåíû\n";
+            cout << row_num << " ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã±Ã«Ã®Ã¢Ã  Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã»\n";
             return false;
         }
         else words=1;
@@ -33,7 +33,7 @@ bool Split(string s,int row_num)
     }
     if (words==0)
     {
-        cout << row_num << " Îøèáêà: ñëîâà íå íàéäåíû\n";
+        cout << row_num << " ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã±Ã«Ã®Ã¢Ã  Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã»\n";
         return false;
     }
     string mas[words];
@@ -62,7 +62,7 @@ bool Split(string s,int row_num)
             wn=i;
         }
     }
-    if (max_dig==0) cout << row_num << " Îøèáêà: öèôðû íå íàéäåíû\n";
+    if (max_dig==0) cout << row_num << " ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã¶Ã¨Ã´Ã°Ã» Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã»\n";
     else cout << row_num+1 << " " << wn+1 << " " << mas[wn] << " " << max_dig << endl;
     for (int i=0; i<words-1; i++)
     {
@@ -77,18 +77,18 @@ int main()
 	ofstream F2("F2.txt");
 	if (!F1.is_open())
     {
-        cout << "Äàííûå íå íàéäåíû\n";
+        cout << "Ã„Ã Ã­Ã­Ã»Ã¥ Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã»\n";
         system("pause");
         return 0;
     }
-    cout << "íîìåð ñòðîêè|íîìåð ñëîâà|ñëîâî|êîë-âî öèôð\n";
+    cout << "Ã­Ã®Ã¬Ã¥Ã° Ã±Ã²Ã°Ã®ÃªÃ¨|Ã­Ã®Ã¬Ã¥Ã° Ã±Ã«Ã®Ã¢Ã |Ã±Ã«Ã®Ã¢Ã®|ÃªÃ®Ã«-Ã¢Ã® Ã¶Ã¨Ã´Ã°\n";
     int row_num=0;
     while (!F1.eof())
     {
         string row;
         getline(F1,row);
         if (row.length()!=0){ if (Split(row,row_num)) F2<<row+"\n";}
-        else cout<< row_num << " Îøèáêà: ïóñòàÿ ñòðîêà\n";
+        else cout<< row_num << " ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã¯Ã³Ã±Ã²Ã Ã¿ Ã±Ã²Ã°Ã®ÃªÃ \n";
         row_num++;
     }
 	F1.close();

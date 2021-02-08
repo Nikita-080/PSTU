@@ -13,10 +13,10 @@ struct Student
 };
 void Data_print_console(Student* Data_base)
 {
-    cout << "Äàííûå ïîëó÷åíû:\n";
+    cout << "Ã„Ã Ã­Ã­Ã»Ã¥ Ã¯Ã®Ã«Ã³Ã·Ã¥Ã­Ã»:\n";
     for (int i=0;i<4;i++)
     {
-        cout << "Ñòóäåíò " << i+1 << endl;
+        cout << "Ã‘Ã²Ã³Ã¤Ã¥Ã­Ã² " << i+1 << endl;
         cout << Data_base[i].fio << endl;
         cout << Data_base[i].birthday << endl;
         cout << Data_base[i].adress << endl;
@@ -42,7 +42,7 @@ int main()
     ifstream F1("F1.txt");
 	if (!F1.is_open())
     {
-        cout << "Äàííûå íå íàéäåíû\n";
+        cout << "Ã„Ã Ã­Ã­Ã»Ã¥ Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã»\n";
         system("pause");
         return 0;
     }
@@ -60,14 +60,14 @@ int main()
     }
     catch(...)
     {
-        cout << "Äàííûå ïîâğåæäåíû èëè íå ñîîòâåòñòâóşò ôîğìàòó\n";
+        cout << "Ã„Ã Ã­Ã­Ã»Ã¥ Ã¯Ã®Ã¢Ã°Ã¥Ã¦Ã¤Ã¥Ã­Ã» Ã¨Ã«Ã¨ Ã­Ã¥ Ã±Ã®Ã®Ã²Ã¢Ã¥Ã²Ã±Ã²Ã¢Ã³Ã¾Ã² Ã´Ã®Ã°Ã¬Ã Ã²Ã³\n";
         system("pause");
         return 0;
     }
     Data_print_console(Data_base);
     string find_name;
     cout << endl;
-    cout << "Ââåäèòå èñêîìóş ôàìèëèş:\n";
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¨Ã±ÃªÃ®Ã¬Ã³Ã¾ Ã´Ã Ã¬Ã¨Ã«Ã¨Ã¾:\n";
     cin >> find_name;
     cin.get();
     ofstream F2("F2.txt");
@@ -88,14 +88,14 @@ int main()
             string new_birthday;
             string new_adress;
             string new_rating;
-            cout << "Îáíàğóæåíà èñêîìàÿ ôàìèëèÿ\n";
-            cout << "Ââåäèòå ÔÈÎ íîâîãî ıëåìåíòà\n";
+            cout << "ÃÃ¡Ã­Ã Ã°Ã³Ã¦Ã¥Ã­Ã  Ã¨Ã±ÃªÃ®Ã¬Ã Ã¿ Ã´Ã Ã¬Ã¨Ã«Ã¨Ã¿\n";
+            cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã”ÃˆÃ Ã­Ã®Ã¢Ã®Ã£Ã® Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã \n";
             getline(cin,new_fio);
-            cout << "Ââåäèòå äàòó ğîæäåíèÿ íîâîãî ıëåìåíòà\n";
+            cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¤Ã Ã²Ã³ Ã°Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¿ Ã­Ã®Ã¢Ã®Ã£Ã® Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã \n";
             getline(cin,new_birthday);
-            cout << "Ââåäèòå àäğåñ íîâîãî ıëåìåíòà\n";
+            cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã Ã¤Ã°Ã¥Ã± Ã­Ã®Ã¢Ã®Ã£Ã® Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã \n";
             getline(cin,new_adress);
-            cout << "Ââåäèòå ğåéòèíã íîâîãî ıëåìåíòà\n";
+            cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã°Ã¥Ã©Ã²Ã¨Ã­Ã£ Ã­Ã®Ã¢Ã®Ã£Ã® Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã \n";
             getline(cin,new_rating);
             F2<<new_fio<<"\n";
             F2<<new_birthday<<"\n";

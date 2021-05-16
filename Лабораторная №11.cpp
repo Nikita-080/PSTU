@@ -40,7 +40,7 @@ void DEL_list_2(List2* LIST)
 }
 void PRINT_list_2(List2* LIST)
 {
-    cout << "Ðåçóëüòàò:\n";
+    cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²:\n";
     List2* p=LIST;
     while (p!=NULL)
     {
@@ -54,7 +54,7 @@ void DO_list_2(List2* LIST)
     string s;
     while (p->next!=NULL)
     {
-        cout << "Ââåäèòå íîâîå ñëîâî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã®Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
         cin >> s;
         List2* NEW=new List2;
         NEW->data=s;
@@ -112,7 +112,7 @@ List* DO_list_1(List* LIST)
 }
 void PRINT_list_1(List* LIST)
 {
-    cout << "Ðåçóëüòàò:\n";
+    cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²:\n";
     List* p=LIST;
     while (p!=NULL)
     {
@@ -137,12 +137,12 @@ void Proc_list_1()
     int x;
     bool flag=false;
     LIST->next=NULL;
-    cout << "Ââåäèòå ÷èñëî\n";
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®\n";
     cin >> x;
     LIST->data=x;
     for (int i=0;i<len-1;i++)
     {
-        cout << "Ââåäèòå ÷èñëî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®\n";
         cin >> x;
         if (x%2==1) flag=true;
         PUSH_list_1(LIST,x);
@@ -152,7 +152,7 @@ void Proc_list_1()
         LIST=DO_list_1(LIST);
         PRINT_list_1(LIST);
     }
-    else cout << "Ðåçóëüòàò: ñïèñîê óäàëåí\n";
+    else cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²: Ã±Ã¯Ã¨Ã±Ã®Ãª Ã³Ã¤Ã Ã«Ã¥Ã­\n";
     DEL_list_1(LIST);
 }
 void Proc_list_2_fun()
@@ -161,12 +161,12 @@ void Proc_list_2_fun()
     LIST->last=NULL;
     LIST->next=NULL;
     string s;
-    cout << "Ââåäèòå ñëîâî\n";
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
     cin >> s;
     LIST->data=s;
     for (int i=0;i<len-1;i++)
     {
-        cout << "Ââåäèòå ñëîâî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
         cin >> s;
         PUSH_list_2(LIST,s);
     }
@@ -180,17 +180,17 @@ void Proc_list_2_lib()
     string s;
     for (int i=0;i<len;i++)
     {
-        cout << "Ââåäèòå ñëîâî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
         cin >> s;
         LIST.push_back(s);
     }
     for (auto iter=LIST.begin();iter!=LIST.end();iter++)
     {
-        cout << "Ââåäèòå íîâûé ýëåìåíò\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²\n";
         cin >> s;
         LIST.insert(iter,s);
     }
-    cout << "Ðåçóëüòàò\n";
+    cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²\n";
     for (auto iter=LIST.begin();iter!=LIST.end();iter++) cout << *iter << endl;
 }
 Stack* PUSH_stack(Stack* STACK, int x)
@@ -212,14 +212,14 @@ void Proc_stack_fun()
     int x;
     int arr[len];
     int flag=0;
-    cout << "Ââåäèòå ÷èñëî\n";
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®\n";
     cin >> x;
     if (x%2==1) flag++;
     STACK->data=x;
     STACK->last=NULL;
     for (int i=0;i<len-1;i++)
     {
-        cout << "Ââåäèòå ÷èñëî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®\n";
         cin >> x;
         if (x%2==1) flag++;
         STACK=PUSH_stack(STACK,x);
@@ -232,14 +232,14 @@ void Proc_stack_fun()
     for (int i=0;i<len;i++) if (arr[i]%2==1) STACK=PUSH_stack(STACK,arr[i]);
     if (flag>0)
     {
-        cout << "Ðåçóëüòàò\n";
+        cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²\n";
         while (STACK!=NULL)
         {
             cout << STACK->data << endl;
             STACK=POP_stack(STACK);
         }
     }
-    else cout << "Ñòåê óäàëåí\n";
+    else cout << "Ã‘Ã²Ã¥Ãª Ã³Ã¤Ã Ã«Ã¥Ã­\n";
 }
 void Proc_stack_lib()
 {
@@ -248,7 +248,7 @@ void Proc_stack_lib()
     int arr[len];
     for (int i=0;i<len;i++)
     {
-        cout << "Ââåäèòå ÷èñëî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã®\n";
         cin >> x;
         STACK.push(x);
     }
@@ -258,10 +258,10 @@ void Proc_stack_lib()
         STACK.pop();
     }
     for (int i=0;i>len;i++) if (arr[i]%2==1) STACK.push(arr[i]);
-    if (STACK.empty()) cout << "Ðåçóëüòàò: ñòåê óäàëåí\n";
+    if (STACK.empty()) cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²: Ã±Ã²Ã¥Ãª Ã³Ã¤Ã Ã«Ã¥Ã­\n";
     else
     {
-        cout << "Ðåçóëüòàò\n";
+        cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²\n";
         for (int i=0;i<STACK.size();i++)
         {
             cout << STACK.top() << endl;
@@ -290,19 +290,19 @@ void Proc_queue_fun()
     stack <string> STACK;
     string arr[len];
     string s;
-    cout << "Ââåäèòå ñëîâî\n";
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
     cin >> s;
     QUEUE->data=s;
     QUEUE->last=NULL;
     for (int i=0;i<len-1;i++)
     {
-        cout << "Ââåäèòå ñëîâî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
         cin >> s;
         PUSH_queue(QUEUE,s);
     }
     for (int i=0;i<len;i++)
     {
-        cout << "Ââåäèòå íîâûé ýëåìåíò\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²\n";
         cin >> arr[i];
     }
     for (int i=0;i<len;i++)
@@ -316,7 +316,7 @@ void Proc_queue_fun()
         STACK.push(QUEUE->data);
         QUEUE=POP_queue(QUEUE);
     }
-    cout << "Ðåçóëüòàò\n";
+    cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²\n";
     for (int i=0;i<len*2;i++)
     {
         cout << STACK.top() << endl;
@@ -331,13 +331,13 @@ void Proc_queue_lib()
     string s;
     for (int i=0;i<len;i++)
     {
-        cout << "Ââåäèòå ñëîâî\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã±Ã«Ã®Ã¢Ã®\n";
         cin >> s;
         QUEUE.push(s);
     }
     for (int i=0;i<len;i++)
     {
-        cout << "Ââåäèòå íîâûé ýëåìåíò\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¢Ã»Ã© Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²\n";
         cin >> arr[i];
     }
     for (int i=0;i<len;i++)
@@ -351,7 +351,7 @@ void Proc_queue_lib()
         STACK.push(QUEUE.front());
         QUEUE.pop();
     }
-    cout << "Ðåçóëüòàò\n";
+    cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²\n";
     for (int i=0;i<len*2;i++)
     {
         cout << STACK.top() << endl;
@@ -365,19 +365,19 @@ int main()
     while (true)
     {
         cout << "\n";
-        cout << "Îäíîíàïðàâëåííûé ñïèñîê.............1\n";
-        cout << "Äâóíàïðàâëåííûé ñïèñîê (ôóíêöèè)....2\n";
-        cout << "Äâóíàïðàâëåííûé ñïèñîê (áèáëèîòåêà).3\n";
-        cout << "Ñòåê (ôóíêöèè)......................4\n";
-        cout << "Ñòåê (áèáëèîòåêà)...................5\n";
-        cout << "Î÷åðåäü (ôóíêöèè)...................6\n";
-        cout << "Î÷åðåäü (áèáëèîòåêà)................7\n";
+        cout << "ÃŽÃ¤Ã­Ã®Ã­Ã Ã¯Ã°Ã Ã¢Ã«Ã¥Ã­Ã­Ã»Ã© Ã±Ã¯Ã¨Ã±Ã®Ãª.............1\n";
+        cout << "Ã„Ã¢Ã³Ã­Ã Ã¯Ã°Ã Ã¢Ã«Ã¥Ã­Ã­Ã»Ã© Ã±Ã¯Ã¨Ã±Ã®Ãª (Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¨)....2\n";
+        cout << "Ã„Ã¢Ã³Ã­Ã Ã¯Ã°Ã Ã¢Ã«Ã¥Ã­Ã­Ã»Ã© Ã±Ã¯Ã¨Ã±Ã®Ãª (Ã¡Ã¨Ã¡Ã«Ã¨Ã®Ã²Ã¥ÃªÃ ).3\n";
+        cout << "Ã‘Ã²Ã¥Ãª (Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¨)......................4\n";
+        cout << "Ã‘Ã²Ã¥Ãª (Ã¡Ã¨Ã¡Ã«Ã¨Ã®Ã²Ã¥ÃªÃ )...................5\n";
+        cout << "ÃŽÃ·Ã¥Ã°Ã¥Ã¤Ã¼ (Ã´Ã³Ã­ÃªÃ¶Ã¨Ã¨)...................6\n";
+        cout << "ÃŽÃ·Ã¥Ã°Ã¥Ã¤Ã¼ (Ã¡Ã¨Ã¡Ã«Ã¨Ã®Ã²Ã¥ÃªÃ )................7\n";
         cout << endl;
-        cout << "Ââåäèòå íîìåð ðàáîòû\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã­Ã®Ã¬Ã¥Ã° Ã°Ã Ã¡Ã®Ã²Ã»\n";
         cin >> work;
         while (len<2)
         {
-            cout << "Ââåäèòå äëèíó ñòðóêòóðû:\n";
+            cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¤Ã«Ã¨Ã­Ã³ Ã±Ã²Ã°Ã³ÃªÃ²Ã³Ã°Ã»:\n";
             cin >> len;
         }
         switch (work)
@@ -404,7 +404,7 @@ int main()
             Proc_queue_lib();
             break;
         default:
-            cout << "Äàííûé íîìåð îòñóòñòâóåò\n:(\n";
+            cout << "Ã„Ã Ã­Ã­Ã»Ã© Ã­Ã®Ã¬Ã¥Ã° Ã®Ã²Ã±Ã³Ã²Ã±Ã²Ã¢Ã³Ã¥Ã²\n:(\n";
         }
         len=-1;
         work=-1;

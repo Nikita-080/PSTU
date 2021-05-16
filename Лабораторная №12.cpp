@@ -20,9 +20,9 @@ bool comp(CITIZEN a, CITIZEN b)
 }
 void Print(CITIZEN a)
 {
-    cout << "ÔÈÎ            : " << a.fio << endl;
-    cout << "Äàòà ðîæäåíèÿ  : " << a.birthday << endl;
-    cout << "Íîìåð ïàññïîðòà: " << a.passport << endl;
+    cout << "Ã”ÃˆÃŽ            : " << a.fio << endl;
+    cout << "Ã„Ã Ã²Ã  Ã°Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¿  : " << a.birthday << endl;
+    cout << "ÃÃ®Ã¬Ã¥Ã° Ã¯Ã Ã±Ã±Ã¯Ã®Ã°Ã²Ã : " << a.passport << endl;
 }
 int Linear(CITIZEN arr[], string x)
 {
@@ -71,7 +71,7 @@ int main()
 	string user_search;
 	while (len<2 || len>100)
     {
-        cout << "Ââåäèòå ðàçìåð òàáëèöû\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã°Ã Ã§Ã¬Ã¥Ã° Ã²Ã Ã¡Ã«Ã¨Ã¶Ã»\n";
         cin >> len;
     }
     cin.get();
@@ -86,19 +86,19 @@ int main()
     sort(data_base,data_base+len,comp);
     while (true)
     {
-        cout << "Ââåäèòå çàïðîñ\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã§Ã Ã¯Ã°Ã®Ã±\n";
         cin >> user_search;
         int pos1=Linear(data_base,user_search);
         int pos2=Binary(data_base,user_search);
         int pos3=Interpol(data_base,user_search);
-        if (pos1==-1 || pos2==-1 || pos3==-1) cout << "Ýëåìåíò íå íàéäåí\n";
+        if (pos1==-1 || pos2==-1 || pos3==-1) cout << "ÃÃ«Ã¥Ã¬Ã¥Ã­Ã² Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­\n";
         else
         {
-            cout << "Ðåçóëüòàò ëèíåéíîãî ïîèñêà:\n";
+            cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã² Ã«Ã¨Ã­Ã¥Ã©Ã­Ã®Ã£Ã® Ã¯Ã®Ã¨Ã±ÃªÃ :\n";
             Print(data_base[pos1]);
-            cout << "Ðåçóëüòàò ïðÿìîãî ïîèñêà ïîäñòðîêè â ñòðîêå:\n";
+            cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã² Ã¯Ã°Ã¿Ã¬Ã®Ã£Ã® Ã¯Ã®Ã¨Ã±ÃªÃ  Ã¯Ã®Ã¤Ã±Ã²Ã°Ã®ÃªÃ¨ Ã¢ Ã±Ã²Ã°Ã®ÃªÃ¥:\n";
             Print(data_base[pos2]);
-            cout << "Ðåçóëüòàò èíòåðïîëÿöèîííîãî ïîèñêà:\n";
+            cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã² Ã¨Ã­Ã²Ã¥Ã°Ã¯Ã®Ã«Ã¿Ã¶Ã¨Ã®Ã­Ã­Ã®Ã£Ã® Ã¯Ã®Ã¨Ã±ÃªÃ :\n";
             Print(data_base[pos3]);
             cout << endl;
         }

@@ -12,9 +12,9 @@ struct CITIZEN
 };
 void Print(CITIZEN a)
 {
-    cout << "ÔÈÎ            : " << a.fio << endl;
-    cout << "Äàòà ðîæäåíèÿ  : " << a.birthday << endl;
-    cout << "Íîìåð ïàññïîðòà: " << a.passport << endl;
+    cout << "Ã”ÃˆÃŽ            : " << a.fio << endl;
+    cout << "Ã„Ã Ã²Ã  Ã°Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¿  : " << a.birthday << endl;
+    cout << "ÃÃ®Ã¬Ã¥Ã° Ã¯Ã Ã±Ã±Ã¯Ã®Ã°Ã²Ã : " << a.passport << endl;
 }
 int Linear(string s, string x)
 {
@@ -126,7 +126,7 @@ int main()
 	string user_search;
 	while (len<2 || len>100)
     {
-        cout << "Ââåäèòå ðàçìåð òàáëèöû\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã°Ã Ã§Ã¬Ã¥Ã° Ã²Ã Ã¡Ã«Ã¨Ã¶Ã»\n";
         cin >> len;
     }
     cin.get();
@@ -143,7 +143,7 @@ int main()
     while (true)
     {
         user_search="1";
-        cout << "Ââåäèòå çàïðîñ\n";
+        cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã§Ã Ã¯Ã°Ã®Ã±\n";
         while (user_search.size()<8) cin >> user_search;
         int pos1=Linear(mas,user_search);
         cout << 1;
@@ -151,14 +151,14 @@ int main()
         cout << 2;
         int pos3=BM(mas,user_search);
         cout << 3;
-        if (pos1==-1 || pos2==-1 || pos3==-1) cout << "Ýëåìåíò íå íàéäåí\n";
+        if (pos1==-1 || pos2==-1 || pos3==-1) cout << "ÃÃ«Ã¥Ã¬Ã¥Ã­Ã² Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­\n";
         else
         {
-            cout << "Ðåçóëüòàò ïðÿìîãî ïîèñêà:\n";
+            cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã² Ã¯Ã°Ã¿Ã¬Ã®Ã£Ã® Ã¯Ã®Ã¨Ã±ÃªÃ :\n";
             Print(data_base[pos1]);
-            cout << "Ðåçóëüòàò ìåòîäà ÊÌÏ:\n";
+            cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã² Ã¬Ã¥Ã²Ã®Ã¤Ã  ÃŠÃŒÃ:\n";
             Print(data_base[pos2]);
-            cout << "Ðåçóëüòàò ìåòîäà ÁÌ:\n";
+            cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã² Ã¬Ã¥Ã²Ã®Ã¤Ã  ÃÃŒ:\n";
             Print(data_base[pos3]);
             cout << endl;
         }

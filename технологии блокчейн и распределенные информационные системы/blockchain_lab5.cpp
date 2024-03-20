@@ -22,16 +22,19 @@ void Print(double* a, double* b)
 
 int main(int argc, char** argv)
 {
-    int size, rank, block;
+    int size, rank;
 
-    MPI_Init(&argc, &argv);
+    MPI_Init(NULL,NULL);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    double* A = new double[N * N];
-    double* X = new double[N];
-    double* B = new double[N];
-    double* Result = new double[N];
+    size = std::min(size - 1, N) + 1;
+    int num_lines = N % (size-1) == 0 ? N / (size-1) : N / (size-1) + 1;
+    
+    double* A = new double[N * N] {};
+    double* X = new double[N] {};
+    double* B = new double[N] {};
+    double* Result = new double[N] {};
 
     if (rank == 0)
     {
@@ -46,59 +49,22 @@ int main(int argc, char** argv)
         }
 
         if (N < 10) Print(A, B);
-
+        
         auto start_time = std::chrono::steady_clock::now();
-
-        for (int k = 0; k < N - 1; k++)
+        
+        double* block_a = new double[num_lines * N] {};
+        double* block_b = new double[num_lines] {};
+        
+        for (int i = 1; i < size; i++)
         {
-            double pivot = A[k * N + k];
-            int block = (N - k - 1) / (size - 1) + 1;
-            double* data_a = new double[block * N] {};
-            double* data_b = new double[block] {};
-
-            for (int i = 1; i < size; i++)
-            {
-                if (block * (i - 1) + k + 1 < N)
-                {
-                    MPI_Send(A, N * N, MPI_DOUBLE, i, 0, MPI_COMM_WORLD);
-                    MPI_Send(B, N, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
-                    MPI_Send(&pivot, 1, MPI_DOUBLE, i, 2, MPI_COMM_WORLD);
-                }
-            }
-            for (int i = 1; i < std::min(size, N - k); i++)
-            {
-                if (block * (i - 1) + k + 1 < N)
-                {
-                    MPI_Recv(data_a, block * N, MPI_DOUBLE, i, 3, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                    MPI_Recv(data_b, block, MPI_DOUBLE, i, 4, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                    for (int j = 0; j < block * N; j++)
-                    {
-                        int row = (i - 1) * block + j / N + k + 1;
-                        if (row < N)
-                        {
-                            int col = j % N;
-                            A[row * N + col] = data_a[j];
-                        }
-                    }
-                    for (int j = 0; j < block; j++)
-                    {
-                        int row = (i - 1) * block + j + k + 1;
-                        if (row < N)
-                        {
-                            B[row] = data_b[j];
-                        }
-                    }
-                }
-            }
-            delete[] data_a;
-            delete[] data_b;
+            int current_num_lines = num_lines;
+            if (N % (size-1) != 0 && i == size - 1) current_num_lines = N % num_lines;
+            for (int j = 0; j < current_num_lines * N; j++) block_a[j] = A[(i - 1) * (N * num_lines) + j];
+            for (int j = 0; j < current_num_lines; j++) block_b[j] = B[(i - 1) * num_lines + j];
+            MPI_Send(block_a, N * num_lines, MPI_DOUBLE, i, 0, MPI_COMM_WORLD);
+            MPI_Send(block_b, num_lines, MPI_DOUBLE, i, 1, MPI_COMM_WORLD);
         }
-        for (int k = N - 1; k >= 0; k--)
-        {
-            double s = 0;
-            for (int i = k + 1; i < N; i++) s += A[k * N + i] * Result[i];
-            Result[k] = (B[k] - s) / A[k * N + k];
-        }
+        MPI_Recv(Result, N, MPI_DOUBLE, 1, 3, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         auto end_time = std::chrono::steady_clock::now();
         auto elapsed_ns = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time);
@@ -116,38 +82,57 @@ int main(int argc, char** argv)
     }
     else
     {
-        for (int i = 0; i < N - 1; i++)
+        if (rank < size)
         {
-            int block = (N - i - 1) / (size - 1) + 1;
-            if (block * (rank - 1) + i + 1 < N)
-            {
-                double pivot;
-                double* data_a = new double[block * N] {};
-                double* data_b = new double[block] {};
-                MPI_Recv(A, N * N, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                MPI_Recv(B, N, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                MPI_Recv(&pivot, 1, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                for (int j = 0; j < block; j++)
-                {
-                    int work_row = block * (rank - 1) + j + i + 1;
-                    if (work_row < N)
-                    {
-                        double lik = A[work_row * N + i] / pivot;
-                        for (int k = 0; k < N; k++)
-                        {
-                            data_a[j * N + k] = A[work_row * N + k];
-                            if (k >= i) data_a[j * N + k] -= lik * A[i * N + k];
-                        }
-                        data_b[j] = B[work_row] - lik * B[i];
-                    }
-                }
-                MPI_Send(data_a, block * N, MPI_DOUBLE, 0, 3, MPI_COMM_WORLD);
-                MPI_Send(data_b, block, MPI_DOUBLE, 0, 4, MPI_COMM_WORLD);
-                delete[] data_a;
-                delete[] data_b;
-            }
-        }
+            int current_num_lines = num_lines;
+            if (N % (size-1) != 0 && rank == size - 1) current_num_lines = N % num_lines;
 
+            double** arr{ new double* [current_num_lines] {} };
+            double* block_a = new double[num_lines * N] {};
+            double* block_b = new double[num_lines] {};
+            double* main_line = new double[N + 1] {};
+
+            int block_start = (rank - 1) * num_lines;
+            int block_end = block_start + current_num_lines;
+
+            MPI_Recv(block_a, N * num_lines, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(block_b, num_lines, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+            for (int i = 0; i < current_num_lines; i++)
+            {
+                arr[i] = new double[N + 1] {};
+                for (int j = 0; j < N; j++) arr[i][j] = block_a[i * N + j];
+                arr[i][N] = block_b[i];
+            }
+            for (int i = 0; i < N - 1; i++)
+            {
+                if (i < block_start) MPI_Recv(main_line, N + 1, MPI_DOUBLE, i / num_lines + 1, 100 + i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                else if (i >= block_end) break;
+                else
+                {
+                    main_line = arr[i - block_start];
+                    for (int address = rank + 1; address < size; address++) MPI_Send(main_line, N + 1, MPI_DOUBLE, address, 100 + i, MPI_COMM_WORLD);
+                }
+                int start = i < block_start ? 0 : i - block_start + 1;
+                double pivot = main_line[i];
+                for (int j = start; j < current_num_lines; j++)
+                {
+                    double lik = arr[j][i] / pivot;
+                    for (int k = i; k < N; k++) arr[j][k] -= lik * main_line[k];
+                    arr[j][N] -= lik * main_line[N];
+                }
+            }
+
+            double* x = new double[N] {};
+            if (rank != size - 1) MPI_Recv(x, N, MPI_DOUBLE, rank + 1, 3, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            for (int k = current_num_lines - 1; k >= 0; k--)
+            {
+                double s = 0;
+                for (int i = block_start + k + 1; i < N; i++) s += arr[k][i] * x[i];
+                x[k + block_start] = (arr[k][N] - s) / arr[k][k + block_start];
+            }
+            MPI_Send(x, N, MPI_DOUBLE, rank - 1, 3, MPI_COMM_WORLD);
+        }
     }
     MPI_Finalize();
 }
